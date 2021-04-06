@@ -20,6 +20,6 @@ Le projet est réalisé de plusieurs classes dont la principale étant `TopLevel
 
 ### Reste à faire
 
-[x] Terminer les fonctions basiques du programme
-[] Créer une version executable du projet (\*.jar)
-[x] Créer une belle interface graphique
+- [x] Terminer les fonctions basiques du programme
+- [ ]Créer une version executable du projet (\*.jar)
+- [ ] Créer une belle interface graphique
