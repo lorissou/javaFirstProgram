@@ -26,4 +26,5 @@ Le projet est réalisé de plusieurs classes dont la principale étant `TopLevel
 
 - [x] Terminer les fonctions basiques du programme
 - [x] Créer une version executable du projet (\*.jar)
+- [ ] Créer une class avec fonction print dans format de log dans la console
 - [ ] Créer une belle interface graphique
