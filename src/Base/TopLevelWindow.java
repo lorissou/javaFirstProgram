@@ -170,8 +170,8 @@ public class TopLevelWindow {
 					
 					b_val = Math.sqrt(Math.pow(c_val, 2) - Math.pow(a_val, 2));
 					
-					if (b_val % 1 != 0) {b.setText(String.valueOf(b_val));}
-					else if (b_val % 1 == 0) {b.setText(String.valueOf(String.format("%." + tmp_numberOfDecimal + "g%n", b_val)));}
+					if (b_val % 1 != 0) {b.setText(String.valueOf(String.format("%." + tmp_numberOfDecimal + "g%n", b_val)));}
+					else if (b_val % 1 == 0) {b.setText(String.valueOf((int) b_val));}
 					else {OptionPaneSwing.showFatalError("Erreur fatale");}
 				
 				} 
@@ -184,8 +184,8 @@ public class TopLevelWindow {
 					
 					a_val = Math.sqrt(Math.pow(c_val, 2) - Math.pow(b_val, 2));
 					
-					if (a_val % 1 != 0) {a.setText(String.valueOf(a_val));}
-					else if (a_val % 1 == 0) {a.setText(String.valueOf(String.format("%." + tmp_numberOfDecimal + "g%n", a_val)));}
+					if (a_val % 1 != 0) {a.setText(String.valueOf(String.format("%." + tmp_numberOfDecimal + "g%n", a_val)));}
+					else if (a_val % 1 == 0) {a.setText(String.valueOf((int) a_val));}
 					else {OptionPaneSwing.showFatalError("Erreur fatale");}
 				}
 				
