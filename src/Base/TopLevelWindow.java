@@ -13,7 +13,7 @@ import Old.Utils;
 
 /**
  * <h1>Chiffres premiers</h1>
- * <p>Programme d�di� au calcul des chiffres premiers<p>
+ * <p>Programme dédié au calcul des chiffres premiers<p>
  * @author Loris
  */
 
@@ -23,7 +23,7 @@ public class TopLevelWindow {
 		
 		JFrame frame = new JFrame("Pythagore - a, b, c");
 		
-		// D�claration des TextField
+		// Déclaration des TextField
 		JTextField valeur_aField = new JTextField("", 10);
 		frame.add(valeur_aField);
 		
@@ -35,7 +35,7 @@ public class TopLevelWindow {
 		
 		JButton calculateButton = new JButton("Calculer");
 		frame.add(calculateButton);
-		calculateButton.addActionListener(new ActionListener() { // D�claration de l'action � r�aliser lors de l'appui du bouton
+		calculateButton.addActionListener(new ActionListener() { // Déclaration de l'action à réaliser lors de l'appui du bouton
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,13 +45,15 @@ public class TopLevelWindow {
 		});
 		
 		// Bouton effacer les champs
-		JButton effacerButton = new JButton();
+		JButton effacerButton = new JButton("Effacer");
 		frame.add(effacerButton);
 		effacerButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				valeur_aField.setText("");
+				valeur_bField.setText("");
+				valeur_cField.setText("");
 			}
 		});
 		
@@ -61,10 +63,11 @@ public class TopLevelWindow {
 		frame.pack();
 		frame.setLayout(new FlowLayout());
 		frame.setVisible(true);
-		frame.setSize(500,75);
+		frame.setSize(600,75);
 		
 	}
 	
+	// Fonction calculer
 	public static void calculate(JTextField a,JTextField b,JTextField c) {
 		
 		if (a.getText().contains(",") == true) {a.setText(a.getText().replace(",", "."));}
@@ -84,7 +87,7 @@ public class TopLevelWindow {
 		try {
 			
 			System.out.println("Demande avec [" + numberOfEmpty.size() + "] de case(s) libre " + numberOfEmpty);
-			System.out.println("Demande avec a=" + a_val + " b=" + b_val + " c=" + c_val);
+			System.out.println("Demande avec a=" + a_val + " b=" + b_val + " c=" + c_val + "\n");
 			
 			// Si 1 case de remplie
 			if (numberOfEmpty.size() == 2) { OptionPaneSwing.showDialog("Veuillez remplir au minimum 2 champs", "Erreur utilisateur", 0); }
@@ -96,9 +99,30 @@ public class TopLevelWindow {
 				b_val = Double.parseDouble(b.getText());
 				c_val = Double.parseDouble(c.getText());
 				
-				if (Math.ceil(Math.pow(a_val, 2) + Math.pow(b_val, 2)) == Math.ceil(Math.pow(c_val, 2))) {System.out.println("Hello");}
+				// Cas ou l'égalité est bonn
+				if (Math.ceil(Math.pow(a_val, 2) + Math.pow(b_val, 2)) == Math.ceil(Math.pow(c_val, 2))) {
+					
+					String ligne1 = "L'équation A² + B² = C² est vérifiée :";
+					String ligne2 = Math.ceil(a_val) + "² + " + Math.ceil(b_val) + "² = " + Math.ceil(c_val) + "²";
+					String ligne3 = Math.ceil(Math.pow(a_val, 2)) + " + " + Math.ceil(Math.pow(b_val, 2)) + " = " + Math.ceil(Math.pow(c_val, 2));
+					
+					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3;
+					
+					OptionPaneSwing.showDialog(message, "L'équation est vérifiée", 1);
+					
+				}
+				else {
+					
+					String ligne1 = "L'équation A² + B² = C² n'est pas est vérifiée :";
+					String ligne2 = Math.ceil(a_val) + "² + " + Math.ceil(b_val) + "² ≠ " + Math.ceil(c_val) + "²";
+					String ligne3 = Math.ceil(Math.pow(a_val, 2)) + " + " + Math.ceil(Math.pow(b_val, 2)) + " ≠ " + Math.ceil(Math.pow(c_val, 2));
+					
+					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3;
+					
+					OptionPaneSwing.showDialog(message, "L'équation est vérifiée", 1);
+					
+				}
 				
-				OptionPaneSwing.showDialog("Calcul", "", 1);
 				
 				}
 			
@@ -108,9 +132,10 @@ public class TopLevelWindow {
 				if (a.getText().isEmpty() == true && b.getText().isEmpty() == true && c.getText().isEmpty() == true) {
 					OptionPaneSwing.showDialog("Veuillez remplir tous les champs...", "Erreur", 2);
 				}
+				
+				// a & b != null ; c == null
 				if (a.getText().isEmpty() == false && b.getText().isEmpty() == false && c.getText().isEmpty() == true) {
 					
-					// a & b != null ; c == null
 					a_val = Double.parseDouble(a.getText());
 					b_val = Double.parseDouble(b.getText());
 					
@@ -120,9 +145,10 @@ public class TopLevelWindow {
 					else if (c_val % 1 == 0) {c.setText(String.valueOf((int) c_val));}
 					else {OptionPaneSwing.showFatalError("Erreur fatale");}
 				
-				} else if (a.getText().isEmpty() == false && b.getText().isEmpty() == true && c.getText().isEmpty() == false) {
-					
-					// a & c != null ; b == null
+				} 
+				
+				// a & c != null ; b == null
+				else if (a.getText().isEmpty() == false && b.getText().isEmpty() == true && c.getText().isEmpty() == false) {
 					
 					a_val = Double.parseDouble(a.getText());
 					c_val = Double.parseDouble(c.getText());
@@ -133,9 +159,10 @@ public class TopLevelWindow {
 					else if (b_val % 1 == 0) {b.setText(String.valueOf((int) b_val));}
 					else {OptionPaneSwing.showFatalError("Erreur fatale");}
 				
-				} else if (a.getText().isEmpty() == true && b.getText().isEmpty() == false && c.getText().isEmpty() == false) {
-					
-					// b & c != null ; a == null
+				} 
+				
+				// b & c != null ; a == null
+				else if (a.getText().isEmpty() == true && b.getText().isEmpty() == false && c.getText().isEmpty() == false) {
 					
 					b_val = Double.parseDouble(b.getText());
 					c_val = Double.parseDouble(c.getText());
@@ -153,7 +180,7 @@ public class TopLevelWindow {
 			else if (numberOfEmpty.size() > 3 || numberOfEmpty.size() < -1) {OptionPaneSwing.showFatalError("Erreur fatale"); }
 			
 		} catch (NumberFormatException e) {
-			OptionPaneSwing.showDialog("Veuillez ins�rer uniquement des caract�res num�riques...", "Erreur syntaxe", 0);
+			OptionPaneSwing.showDialog("Veuillez insérer uniquement des caractères numériques...", "Erreur syntaxe", 0);
 		}
 		
 	}
@@ -162,7 +189,7 @@ public class TopLevelWindow {
 		
 		System.out.println("Starting the interface");
 		
-		OptionPaneSwing.showDialog("Programme de calcul � l'aide du th�or�me de Pythagore\nSachant que \"c\" est hypoth�nuse", "", 1);
+		OptionPaneSwing.showDialog("Programme de calcul à l'aide du théorème de Pythagore\nSachant que \"c\" est hypothénuse", "", 1);
 		
 		createTopWindow();
 		
