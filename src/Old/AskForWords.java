@@ -1,4 +1,4 @@
-package Base;
+package Old;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,9 +43,9 @@ public class AskForWords {
 			
 			String user_input = input_console.nextLine(); // Attente de texte dans la console
 			
-			if (FoundedWords.contains(user_input) == false) { 
+			if (FoundedWords.contains(user_input.toLowerCase()) == false) { 
 				
-				if (WordsToFind.contains(user_input) == true) {
+				if (WordsToFind.contains(user_input.toLowerCase()) == true) {
 				
 					Utils.print("\nTu as trouvé le mot : " + user_input, true);
 				FoundedWords.add(user_input);
