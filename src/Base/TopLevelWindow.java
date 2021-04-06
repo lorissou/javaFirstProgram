@@ -3,13 +3,9 @@ package Base;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
-import Old.Utils;
 
 /**
  * <h1>Chiffres premiers</h1>
@@ -18,6 +14,9 @@ import Old.Utils;
  */
 
 public class TopLevelWindow {
+	
+	final static String[] listeDecimales = {"0 décimales", "1 decimale", "2 décimales", "3 décimales", "4 décimales", "5 décimales", "6 décimales"};
+	static int numberOfDecimals = 3;
 
 	public static void createTopWindow() {
 		
@@ -57,13 +56,30 @@ public class TopLevelWindow {
 			}
 		});
 		
+		JComboBox<String> decimalesComboBox = new JComboBox<String>(listeDecimales);
+		frame.add(decimalesComboBox);
+		decimalesComboBox.setSelectedIndex(numberOfDecimals);
+		decimalesComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				@SuppressWarnings("unchecked")
+				JComboBox<String> cb = (JComboBox<String>) e.getSource(); // Récupérer la combo box dans le Listener
+				int indexElementChoisi = cb.getSelectedIndex(); // get l'index du séléectionné
+		        System.out.println("Décimales choisie : " + indexElementChoisi + "\n");
+		        numberOfDecimals = indexElementChoisi; // set la var globale à la valeur choisie
+				
+			}
+		});
+		
 		//Rendre visible l'interface
 		frame.setAlwaysOnTop(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		frame.pack();
 		frame.setLayout(new FlowLayout());
 		frame.setVisible(true);
-		frame.setSize(600,75);
+		frame.setSize(700,75);
 		
 	}
 	
@@ -84,10 +100,9 @@ public class TopLevelWindow {
 		double b_val = 0;
 		double c_val = 0;
 		
+		int tmp_numberOfDecimal = numberOfDecimals + 1;
+		
 		try {
-			
-			System.out.println("Demande avec [" + numberOfEmpty.size() + "] de case(s) libre " + numberOfEmpty);
-			System.out.println("Demande avec a=" + a_val + " b=" + b_val + " c=" + c_val + "\n");
 			
 			// Si 1 case de remplie
 			if (numberOfEmpty.size() == 2) { OptionPaneSwing.showDialog("Veuillez remplir au minimum 2 champs", "Erreur utilisateur", 0); }
@@ -99,32 +114,32 @@ public class TopLevelWindow {
 				b_val = Double.parseDouble(b.getText());
 				c_val = Double.parseDouble(c.getText());
 				
-				// Cas ou l'égalité est bonn
+				// Cas ou l'égalité est bon
 				if (Math.ceil(Math.pow(a_val, 2) + Math.pow(b_val, 2)) == Math.ceil(Math.pow(c_val, 2))) {
 					
 					String ligne1 = "L'équation A² + B² = C² est vérifiée :";
 					String ligne2 = Math.ceil(a_val) + "² + " + Math.ceil(b_val) + "² = " + Math.ceil(c_val) + "²";
 					String ligne3 = Math.ceil(Math.pow(a_val, 2)) + " + " + Math.ceil(Math.pow(b_val, 2)) + " = " + Math.ceil(Math.pow(c_val, 2));
+					String ligne4 = "Les valeurs sont arrondies pour être vérifiées\n cela ne garanti donc pas vos décimales";
 					
-					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3;
+					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3 + "\n" + ligne4;
 					
 					OptionPaneSwing.showDialog(message, "L'équation est vérifiée", 1);
 					
-				}
-				else {
+				} else {
 					
 					String ligne1 = "L'équation A² + B² = C² n'est pas est vérifiée :";
 					String ligne2 = Math.ceil(a_val) + "² + " + Math.ceil(b_val) + "² ≠ " + Math.ceil(c_val) + "²";
 					String ligne3 = Math.ceil(Math.pow(a_val, 2)) + " + " + Math.ceil(Math.pow(b_val, 2)) + " ≠ " + Math.ceil(Math.pow(c_val, 2));
+					String ligne4 = "Les valeurs sont arrondies pour être vérifiées\n cela ne garanti donc pas vos décimales";
 					
-					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3;
+					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3 + "\n" + ligne4;
 					
 					OptionPaneSwing.showDialog(message, "L'équation est vérifiée", 1);
 					
 				}
 				
-				
-				}
+			}
 			
 			// Si 2 cases de remplies
 			else if (numberOfEmpty.size() == 1) { 
@@ -141,7 +156,7 @@ public class TopLevelWindow {
 					
 					c_val = Math.sqrt(Math.pow(a_val, 2) + Math.pow(b_val, 2));
 					
-					if (c_val % 1 != 0) {c.setText(String.valueOf(c_val));}
+					if (c_val % 1 != 0) {c.setText(String.valueOf(String.format("%." + tmp_numberOfDecimal + "g%n", c_val)));}
 					else if (c_val % 1 == 0) {c.setText(String.valueOf((int) c_val));}
 					else {OptionPaneSwing.showFatalError("Erreur fatale");}
 				
@@ -177,7 +192,7 @@ public class TopLevelWindow {
 			} 
 			
 			// Si cases en erreur
-			else if (numberOfEmpty.size() > 3 || numberOfEmpty.size() < -1) {OptionPaneSwing.showFatalError("Erreur fatale"); }
+		else if (numberOfEmpty.size() > 3 || numberOfEmpty.size() < -1) {OptionPaneSwing.showFatalError("Erreur fatale"); }
 			
 		} catch (NumberFormatException e) {
 			OptionPaneSwing.showDialog("Veuillez insérer uniquement des caractères numériques...", "Erreur syntaxe", 0);
