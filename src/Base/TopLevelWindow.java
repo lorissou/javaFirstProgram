@@ -159,7 +159,6 @@ public class TopLevelWindow {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setSize(450,300);
-		
 	}
 	
 	// Fonction calculer
