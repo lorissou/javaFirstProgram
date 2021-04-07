@@ -144,9 +144,20 @@ public class TopLevelWindow {
 			}
 		});
 		
+		// Déclaration du menu
 		JMenuBar menuBar = new JMenuBar();
 		JMenu themeMenu = new JMenu("Thème");
-		themeMenu.setMnemonic(KeyEvent.VK_A);
+		
+		// Déclration des éléments dans le menu
+		JMenuItem changerThemeMenuItem = new JMenuItem("Changer de thème");
+		ButtonGroup groupeButtonTheme = new ButtonGroup();
+		JRadioButtonMenuItem themeRadioButton = new JRadioButtonMenuItem("Jour");
+		groupeButtonTheme.add(themeRadioButton);
+		themeMenu.add(themeRadioButton);
+		themeRadioButton = new JRadioButtonMenuItem("Nuit");
+		groupeButtonTheme.add(themeRadioButton);
+		themeMenu.add(themeRadioButton);
+		
 		menuBar.add(themeMenu);
 		menuBar.setBackground(Color.decode(lightThemeColor));
 		menuBar.setForeground(Color.BLACK);
@@ -281,6 +292,7 @@ public class TopLevelWindow {
 		
 	}
 	
+	// Fonction d'initialisation
 	public static void main(String[] args) {
 		
 		System.out.println("Starting the interface\n");
