@@ -1,8 +1,12 @@
 package Base;
 
-import java.awt.FlowLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -17,23 +21,79 @@ public class TopLevelWindow {
 	
 	final static String[] listeDecimales = {"0 décimales", "1 decimale", "2 décimales", "3 décimales", "4 décimales", "5 décimales", "6 décimales"};
 	static int numberOfDecimals = 3;
+	
+	final static String principalThemeColor = "#424340";
+	final static String secondaryThemeColor = "#606C5A";
+	final static String tertiaryThemeColor = "#384454";
+	final static String quatuorThemeColor = "#B8CBD0";
+	final static String lightThemeColor = "#C9E3CC";
 
+	//Fonction créer la fenêtre
 	public static void createTopWindow() {
 		
+		// Création de la frame
 		JFrame frame = new JFrame("Pythagore - a, b, c");
+		GridBagLayout layout = new GridBagLayout();
+		frame.setLayout(layout);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(10, 10, 10, 10);
 		
-		// Déclaration des TextField
-		JTextField valeur_aField = new JTextField("", 10);
-		frame.add(valeur_aField);
+		// Déclaration des Labels
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		
-		JTextField valeur_bField = new JTextField("", 10);
-		frame.add(valeur_bField);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		JLabel aLabel = new JLabel("Valeur de a :");
+		aLabel.setForeground(Color.decode(lightThemeColor));
+		frame.add(aLabel, gbc);
 		
-		JTextField valeur_cField = new JTextField("", 10);
-		frame.add(valeur_cField);
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		JLabel bLabel = new JLabel("Valeur de b :");
+		bLabel.setForeground(Color.decode(lightThemeColor));
+		frame.add(bLabel, gbc);
 		
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		JLabel cLabel = new JLabel("Valeur de c :");
+		cLabel.setForeground(Color.decode(lightThemeColor));
+		frame.add(cLabel, gbc);
+		
+		// Déclaration des TextFields
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.gridwidth = 2;
+		JTextField valeur_aField = new JTextField("", 12);
+		valeur_aField.setBackground(Color.decode(secondaryThemeColor));
+		valeur_aField.setForeground(Color.decode(lightThemeColor));
+		valeur_aField.setBorder(null);
+		frame.add(valeur_aField, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridwidth = 2;
+		JTextField valeur_bField = new JTextField("", 12);
+		valeur_bField.setBackground(Color.decode(secondaryThemeColor));
+		valeur_bField.setForeground(Color.decode(lightThemeColor));
+		valeur_bField.setBorder(null);
+		frame.add(valeur_bField, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		gbc.gridwidth = 2;
+		JTextField valeur_cField = new JTextField("", 12);
+		valeur_cField.setBackground(Color.decode(secondaryThemeColor));
+		valeur_cField.setForeground(Color.decode(lightThemeColor));
+		valeur_cField.setBorder(null);
+		frame.add(valeur_cField, gbc);
+		
+		//Déclaration Bouton calculer
+		gbc.gridx = 0;
+		gbc.gridy = 3;
 		JButton calculateButton = new JButton("Calculer");
-		frame.add(calculateButton);
+		calculateButton.setBackground(Color.decode(tertiaryThemeColor));
+		calculateButton.setForeground(Color.decode(lightThemeColor));
+		frame.add(calculateButton, gbc);
 		calculateButton.addActionListener(new ActionListener() { // Déclaration de l'action à réaliser lors de l'appui du bouton
 			
 			@Override
@@ -44,8 +104,12 @@ public class TopLevelWindow {
 		});
 		
 		// Bouton effacer les champs
+		gbc.gridx = 1;
+		gbc.gridy = 3;
 		JButton effacerButton = new JButton("Effacer");
-		frame.add(effacerButton);
+		effacerButton.setBackground(Color.decode(tertiaryThemeColor));
+		effacerButton.setForeground(Color.decode(lightThemeColor));
+		frame.add(effacerButton, gbc);
 		effacerButton.addActionListener(new ActionListener() {
 			
 			@Override
@@ -56,8 +120,15 @@ public class TopLevelWindow {
 			}
 		});
 		
+		// Déclaration du bouton décimales
+		gbc.gridx = 3;
+		gbc.gridy = 3;
+		gbc.gridheight = 3;
+		gbc.fill = GridBagConstraints.VERTICAL;
 		JComboBox<String> decimalesComboBox = new JComboBox<String>(listeDecimales);
-		frame.add(decimalesComboBox);
+		frame.add(decimalesComboBox, gbc);
+		decimalesComboBox.setBackground(Color.decode(tertiaryThemeColor));
+		decimalesComboBox.setForeground(Color.decode(lightThemeColor));
 		decimalesComboBox.setSelectedIndex(numberOfDecimals);
 		decimalesComboBox.addActionListener(new ActionListener() {
 			
@@ -73,29 +144,40 @@ public class TopLevelWindow {
 			}
 		});
 		
+		JMenuBar menuBar = new JMenuBar();
+		JMenu themeMenu = new JMenu("Thème");
+		themeMenu.setMnemonic(KeyEvent.VK_A);
+		menuBar.add(themeMenu);
+		menuBar.setBackground(Color.decode(lightThemeColor));
+		menuBar.setForeground(Color.BLACK);
+		
+		frame.setJMenuBar(menuBar);
+		
 		//Rendre visible l'interface
-		frame.setAlwaysOnTop(true);
+		frame.getContentPane().setBackground(Color.decode(principalThemeColor));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		frame.pack();
-		frame.setLayout(new FlowLayout());
 		frame.setVisible(true);
-		frame.setSize(700,75);
+		frame.setSize(450,300);
 		
 	}
 	
 	// Fonction calculer
 	public static void calculate(JTextField a,JTextField b,JTextField c) {
 		
+		// Remplace les virgules par des points --> Eviter les erreur lors des String vers Double
 		if (a.getText().contains(",") == true) {a.setText(a.getText().replace(",", "."));}
 		if (b.getText().contains(",") == true) {b.setText(b.getText().replace(",", "."));}
 		if (c.getText().contains(",") == true) {c.setText(c.getText().replace(",", "."));}
 		
+		// Créer une variable avec le nombre de cases vides
 		ArrayList<String> numberOfEmpty = new ArrayList<String>();
 		
 		if (a.getText().isEmpty() == true) {numberOfEmpty.add("a");}
 		if (b.getText().isEmpty() == true) {numberOfEmpty.add("b");}
 		if (c.getText().isEmpty() == true) {numberOfEmpty.add("c");}
 		
+		// Initialiser les variables des valeurs des cases
 		double a_val = 0;
 		double b_val = 0;
 		double c_val = 0;
@@ -131,7 +213,7 @@ public class TopLevelWindow {
 					String ligne1 = "L'équation A² + B² = C² n'est pas est vérifiée :";
 					String ligne2 = Math.ceil(a_val) + "² + " + Math.ceil(b_val) + "² ≠ " + Math.ceil(c_val) + "²";
 					String ligne3 = Math.ceil(Math.pow(a_val, 2)) + " + " + Math.ceil(Math.pow(b_val, 2)) + " ≠ " + Math.ceil(Math.pow(c_val, 2));
-					String ligne4 = "Les valeurs sont arrondies pour être vérifiées\n cela ne garanti donc pas vos décimales";
+					String ligne4 = "Pour être vérifiées, les valeurs sont arrondies\nles décimales ne sont donc pas garanties";
 					
 					String message = ligne1 + "\n" + ligne2 + "\n" + ligne3 + "\n" + ligne4;
 					
@@ -202,7 +284,7 @@ public class TopLevelWindow {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Starting the interface");
+		System.out.println("Starting the interface\n");
 		
 		OptionPaneSwing.showDialog("Programme de calcul à l'aide du théorème de Pythagore\nSachant que \"c\" est hypothénuse", "", 1);
 		
