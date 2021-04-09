@@ -25,8 +25,11 @@ public class TopLevelWindow {
 	final static String principalThemeColor = "#424340";
 	final static String secondaryThemeColor = "#606C5A";
 	final static String tertiaryThemeColor = "#384454";
-	final static String quatuorThemeColor = "#B8CBD0";
 	final static String lightThemeColor = "#C9E3CC";
+	final static String JourPrincipalThemeColor = "#ff5722";
+	final static String JourSecondaryThemeColor = "#ff8a50";
+	final static String JourTertiaryThemeColor = "#c41c00";
+	final static String JourLightThemeColor = "#000000";
 
 	//Fonction créer la fenêtre
 	public static void createTopWindow() {
@@ -151,12 +154,85 @@ public class TopLevelWindow {
 		// Déclration des éléments dans le menu
 		JMenuItem changerThemeMenuItem = new JMenuItem("Changer de thème");
 		ButtonGroup groupeButtonTheme = new ButtonGroup();
+		
+		// Bouton Jour
 		JRadioButtonMenuItem themeRadioButton = new JRadioButtonMenuItem("Jour");
 		groupeButtonTheme.add(themeRadioButton);
 		themeMenu.add(themeRadioButton);
+		themeRadioButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Jour");
+				aLabel.setForeground(Color.decode(JourLightThemeColor));
+				bLabel.setForeground(Color.decode(JourLightThemeColor));
+				cLabel.setForeground(Color.decode(JourLightThemeColor));
+				
+				valeur_aField.setBackground(Color.decode(JourSecondaryThemeColor));
+				valeur_aField.setForeground(Color.decode(JourLightThemeColor));
+				
+				valeur_bField.setBackground(Color.decode(JourSecondaryThemeColor));
+				valeur_bField.setForeground(Color.decode(JourLightThemeColor));
+				
+				valeur_cField.setBackground(Color.decode(JourSecondaryThemeColor));
+				valeur_cField.setForeground(Color.decode(JourLightThemeColor));
+				
+				calculateButton.setBackground(Color.decode(JourTertiaryThemeColor));
+				calculateButton.setForeground(Color.decode(JourLightThemeColor));
+				
+				effacerButton.setBackground(Color.decode(JourTertiaryThemeColor));
+				effacerButton.setForeground(Color.decode(JourLightThemeColor));
+				
+				decimalesComboBox.setBackground(Color.decode(JourTertiaryThemeColor));
+				decimalesComboBox.setForeground(Color.decode(JourLightThemeColor));
+				
+				menuBar.setBackground(Color.decode(lightThemeColor));
+				
+				frame.getContentPane().setBackground(Color.decode(JourPrincipalThemeColor));
+			}
+		});
+		
+		// Bouton Nuit
 		themeRadioButton = new JRadioButtonMenuItem("Nuit");
+		themeRadioButton.setSelected(true);
 		groupeButtonTheme.add(themeRadioButton);
 		themeMenu.add(themeRadioButton);
+		themeRadioButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println("Nuit");
+				aLabel.setForeground(Color.decode(lightThemeColor));
+				bLabel.setForeground(Color.decode(lightThemeColor));
+				cLabel.setForeground(Color.decode(lightThemeColor));
+				
+				valeur_aField.setBackground(Color.decode(secondaryThemeColor));
+				valeur_aField.setForeground(Color.decode(lightThemeColor));
+				
+				valeur_bField.setBackground(Color.decode(secondaryThemeColor));
+				valeur_bField.setForeground(Color.decode(lightThemeColor));
+				
+				valeur_cField.setBackground(Color.decode(secondaryThemeColor));
+				valeur_cField.setForeground(Color.decode(lightThemeColor));
+				
+				calculateButton.setBackground(Color.decode(tertiaryThemeColor));
+				calculateButton.setForeground(Color.decode(lightThemeColor));
+				
+				effacerButton.setBackground(Color.decode(tertiaryThemeColor));
+				effacerButton.setForeground(Color.decode(lightThemeColor));
+				
+				decimalesComboBox.setBackground(Color.decode(tertiaryThemeColor));
+				decimalesComboBox.setForeground(Color.decode(lightThemeColor));
+				
+				menuBar.setBackground(Color.decode(lightThemeColor));
+				
+				frame.getContentPane().setBackground(Color.decode(principalThemeColor));
+				
+			}
+		});
+		
 		
 		menuBar.add(themeMenu);
 		menuBar.setBackground(Color.decode(lightThemeColor));
@@ -285,6 +361,7 @@ public class TopLevelWindow {
 			
 			// Si cases en erreur
 		else if (numberOfEmpty.size() > 3 || numberOfEmpty.size() < -1) {OptionPaneSwing.showFatalError("Erreur fatale"); }
+		else if (numberOfEmpty.size() == 3) { OptionPaneSwing.showDialog("Veuillez rentrer au moins deux valeurs dans les champs", "Erreur", 2); }
 			
 		} catch (NumberFormatException e) {
 			OptionPaneSwing.showDialog("Veuillez insérer uniquement des caractères numériques...", "Erreur syntaxe", 0);

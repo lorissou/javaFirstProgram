@@ -17,7 +17,7 @@ public class OptionPaneSwing extends JFrame {
 	
 	public static void showDialog(String message) {
 		
-		showMessagePane(message, "Erreur", 2, null);
+		showMessagePane(message, "", 2, null);
 		
 	}
 	
@@ -73,7 +73,7 @@ public class OptionPaneSwing extends JFrame {
 	
 	public static void showMessagePane (String message, String titre, int messageType, Icon icone) {
 		
-		JOptionPane.showMessageDialog(new JFrame(), message, programName + titre, messageType, icone);
+		JOptionPane.showMessageDialog(new JFrame(), message, programName + " - " + titre, messageType, icone);
 		
 	}
 }
