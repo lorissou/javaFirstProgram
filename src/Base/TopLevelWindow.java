@@ -6,7 +6,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -152,7 +151,6 @@ public class TopLevelWindow {
 		JMenu themeMenu = new JMenu("Thème");
 		
 		// Déclration des éléments dans le menu
-		JMenuItem changerThemeMenuItem = new JMenuItem("Changer de thème");
 		ButtonGroup groupeButtonTheme = new ButtonGroup();
 		
 		// Bouton Jour
@@ -163,7 +161,6 @@ public class TopLevelWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("Jour");
 				aLabel.setForeground(Color.decode(JourLightThemeColor));
 				bLabel.setForeground(Color.decode(JourLightThemeColor));
@@ -202,7 +199,6 @@ public class TopLevelWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("Nuit");
 				aLabel.setForeground(Color.decode(lightThemeColor));
 				bLabel.setForeground(Color.decode(lightThemeColor));
