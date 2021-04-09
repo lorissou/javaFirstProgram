@@ -161,7 +161,6 @@ public class TopLevelWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Jour");
 				aLabel.setForeground(Color.decode(JourLightThemeColor));
 				bLabel.setForeground(Color.decode(JourLightThemeColor));
 				cLabel.setForeground(Color.decode(JourLightThemeColor));
@@ -199,7 +198,6 @@ public class TopLevelWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Nuit");
 				aLabel.setForeground(Color.decode(lightThemeColor));
 				bLabel.setForeground(Color.decode(lightThemeColor));
 				cLabel.setForeground(Color.decode(lightThemeColor));
@@ -227,6 +225,7 @@ public class TopLevelWindow {
 				frame.getContentPane().setBackground(Color.decode(principalThemeColor));
 				
 			}
+			
 		});
 		
 		
